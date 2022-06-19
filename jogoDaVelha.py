@@ -6,8 +6,8 @@ jogaNovamente = "s"
 jogadas = 0
 quemJoga = 1 #1 = Jogador - 2 = Computador  
 maxJogadas=9
-vit = "n"
-velha = [
+vit="n"
+velha=[
     [" ", " ", " "],
     [" ", " ", " "],
     [" ", " ", " "]
@@ -113,7 +113,7 @@ def verificarVitoria():
         soma=0
         idiagl=0
         idiagc=2
-        while idiagc<3:
+        while idiagc>=0:
             if(velha[idiagl][idiagc]==s):
                 soma+=1
             idiagl+=1
@@ -123,8 +123,35 @@ def verificarVitoria():
             break   
     return vitoria    
 
+def rederfinir():
+    global velha
+    global jogadas
+    global quemJoga
+    global maxJogadas
+    global vit
+    jogadas = 0
+    quemJoga = 1 #1 = Jogador - 2 = Computador  
+    maxJogadas=9
+    vit = "n"
+    velha = [
+        [" ", " ", " "],
+        [" ", " ", " "],
+        [" ", " ", " "]
+]
+while(jogaNovamente=="s"):
+    while True:
+        tela()
+        jogadorJoga()
+        cpuJoga()
+        tela()
+        vit=verificarVitoria()
+        if(vit!="n")or (jogadas>=maxJogadas):
+            break
 
-while True:
-    tela()
-    jogadorJoga()
-    cpuJoga()
+    print(Fore.RED + "FIM DE JOGO" + Fore.YELLOW)
+    if(vit=="X" or vit=="O"):
+        print("Resultado: Jogador " + "Venceu!")
+    else:
+        print("Resultado: Empate!")  
+    jogaNovamente=input(Fore.BLUE + "Jogar novamente? [s/n]: " + Fore.RESET)
+    rederfinir()      
